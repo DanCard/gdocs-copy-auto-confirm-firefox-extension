@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "Google Docs Copy Auto-Confirm",
+  "version": "0.1.0",
+  "description": "Automatically accepts the Google Docs \"Make a copy\" prompt (including template macro confirmation).",
+  "icons": {
+    "48": "icons/ai-studio-wrapped-48.png",
+    "96": "icons/ai-studio-wrapped-96.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ],
+        "optional": []
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/document/d/*/copy*"
+      ],
+      "js": [
+        "src/auto-confirm.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "https://docs.google.com/*"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "gdocs-copy-auto-confirm@example.com"
+    }
+  }
+}
