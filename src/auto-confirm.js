@@ -12,6 +12,10 @@ function clickIfMatch(element) {
     return false;
   }
 
+  if (element.disabled || element.getAttribute("aria-disabled") === "true") {
+    return false;
+  }
+
   const text = normalize(element.textContent);
   const aria = normalize(element.getAttribute("aria-label"));
   const label = normalize(element.value);
@@ -59,6 +63,8 @@ function startWatching() {
   observer.observe(document.documentElement, {
     childList: true,
     subtree: true,
+    attributes: true,
+    attributeFilter: ["disabled", "aria-disabled", "class", "style"],
   });
 }
 
